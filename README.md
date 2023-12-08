@@ -112,13 +112,13 @@ from hello_world import plotter
 
 # Prepare the training data
 
-x_refs = np.array([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], dtype=float)
-y_refs = 2 * x_refs - 1
+xs_train = np.array([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], dtype=float)
+ys_train = 2 * xs_train - 1
 
 # Train our neural network
 
 start = time.time()
-linear_regression = LinearRegressionModel(x_refs, y_refs)
+linear_regression = LinearRegressionModel(xs_train, ys_train)
 elapsed = time.time() - start
 
 # Use the trained network to predict outputs
@@ -137,11 +137,13 @@ figure = plotter.plot(xs, ys, ps, title, x_label)
 figure.savefig("images/linear-regression-far-away-from-the-reference.png")
 ```
 
+When you look at the following chart, pay attention to the **10e9** labels as they indicate that we are now asking the model to give us values that range from -1 to +1 (English) billions. That's not bad!
+
 ![Linear regression far away from the reference](images/linear-regression-far-away-from-the-reference.png)
 
-When you look at the following chart, pay attention to the **10e9** labels as they indicate that we are now asking the model to give us values that range from -1 to +1 (English) billions. That's not bad.
-
 ## Two Hidden Layers
+
+### Aproximating a quadratic function
 
 As we may imagine, the linear regresion model won't help us learning non linear functions. This means that our neural network isn't yet able to learn a simple quadratic function like $x^2$.
 
@@ -182,6 +184,88 @@ figure.savefig("images/quadratic-aproximation-using-two-hidden-layers.png")
 ```
 
 ![Quadratic aproximation using two hidden layers](images/quadratic-aproximation-using-two-hidden-layers.png)
+
+### Aproximating a sinusoidal function
+
+Finally, let's test the two layers against a periodic function like $cos(x)$ and see what happens.
+
+```python
+import time
+import numpy as np
+from hello_world.models import *
+from hello_world import plotter
+
+# Prepare the training data
+
+xs = np.arange(-10, 10, .1, dtype=float)
+ys = np.cos(xs)
+
+# Train our neural network
+
+start = time.time()
+hidden_layer = TwoHiddenLayerModel(xs, ys, epochs=3000, hidden_units=64)
+elapsed = time.time() - start
+
+# Use the trained network to predict outputs
+
+ps = hidden_layer.model.predict(xs)
+
+# Plot the results
+
+title = "Model with {} units in a hidden layer after {} epochs".format(
+    hidden_layer.hidden_units,
+    hidden_layer.epochs)
+x_label = "Time elapsed: {:.2f} s".format(elapsed)
+
+figure = plotter.plot(xs, ys, ps, title, x_label)
+figure.savefig("images/sinusoidal-aproximation-using-two-hidden-layers.png")
+```
+
+As you can see, a pretty simple neural network can easily handle this. At least for ranges of points that are close to the points it was trained for.
+
+![Sinusoidal aproximation using two hidden layers](images/sinusoidal-aproximation-using-two-hidden-layers.png)
+
+### Forcing the machine
+
+If you read all this, you probably want to see these algorithms limitations. Actually, if can easily change the previous code to make predict some points that are further than the points we included during the training.
+
+```python
+import time
+import numpy as np
+from hello_world.models import *
+from hello_world import plotter
+
+# Prepare the training data
+
+xs_train = np.arange(-10, 10, .1, dtype=float)
+ys_train = np.cos(xs_train)
+
+# Train our neural network
+
+start = time.time()
+hidden_layer = TwoHiddenLayerModel(xs_train, ys_train, epochs=3000, hidden_units=64)
+elapsed = time.time() - start
+
+# Use the trained network to predict outputs
+
+xs = np.arange(-20, 20, .1, dtype=float)
+ys = np.cos(xs)
+ps = hidden_layer.model.predict(xs)
+
+# Plot the results
+
+title = "Model with {} units in a hidden layer after {} epochs".format(
+    hidden_layer.hidden_units,
+    hidden_layer.epochs)
+x_label = "Time elapsed: {:.2f} s".format(elapsed)
+
+figure = plotter.plot(xs, ys, ps, title, x_label)
+figure.savefig("images/sinusoidal-aproximation-far-from-training-points.png")
+```
+
+As you can see, the network won't have a clue about what we are asking.
+
+![Sinusoidal aproximation far from training points](images/sinusoidal-aproximation-far-from-training-points.png)
 
 ## Installation
 
