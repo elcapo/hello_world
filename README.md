@@ -143,7 +143,7 @@ When you look at the following chart, pay attention to the **10e9** labels as th
 
 ## Two Hidden Layers
 
-### Aproximating a quadratic function
+### Approximating a quadratic function
 
 As we may imagine, the linear regresion model won't help us learning non linear functions. This means that our neural network isn't yet able to learn a simple quadratic function like $x^2$.
 
@@ -180,12 +180,12 @@ title = "Model with {} units in a hidden layer after {} epochs".format(
 x_label = "Time elapsed: {:.2f} s".format(elapsed)
 
 figure = plotter.plot(xs, ys, ps, title, x_label)
-figure.savefig("images/quadratic-aproximation-using-two-hidden-layers.png")
+figure.savefig("images/quadratic-approximation-using-two-hidden-layers.png")
 ```
 
-![Quadratic aproximation using two hidden layers](images/quadratic-aproximation-using-two-hidden-layers.png)
+![Quadratic approximation using two hidden layers](images/quadratic-approximation-using-two-hidden-layers.png)
 
-### Aproximating a sinusoidal function
+### Approximating a sinusoidal function
 
 Finally, let's test the two layers against a periodic function like $cos(x)$ and see what happens.
 
@@ -218,12 +218,12 @@ title = "Model with {} units in a hidden layer after {} epochs".format(
 x_label = "Time elapsed: {:.2f} s".format(elapsed)
 
 figure = plotter.plot(xs, ys, ps, title, x_label)
-figure.savefig("images/sinusoidal-aproximation-using-two-hidden-layers.png")
+figure.savefig("images/sinusoidal-approximation-using-two-hidden-layers.png")
 ```
 
 As you can see, a pretty simple neural network can easily handle this. At least for ranges of points that are close to the points it was trained for.
 
-![Sinusoidal aproximation using two hidden layers](images/sinusoidal-aproximation-using-two-hidden-layers.png)
+![Sinusoidal approximation using two hidden layers](images/sinusoidal-approximation-using-two-hidden-layers.png)
 
 ### Forcing the machine
 
@@ -260,12 +260,12 @@ title = "Model with {} units in a hidden layer after {} epochs".format(
 x_label = "Time elapsed: {:.2f} s".format(elapsed)
 
 figure = plotter.plot(xs, ys, ps, title, x_label)
-figure.savefig("images/sinusoidal-aproximation-far-from-training-points.png")
+figure.savefig("images/sinusoidal-approximation-far-from-training-points.png")
 ```
 
 As you can see, the network won't have a clue about what we are asking.
 
-![Sinusoidal aproximation far from training points](images/sinusoidal-aproximation-far-from-training-points.png)
+![Sinusoidal approximation far from training points](images/sinusoidal-approximation-far-from-training-points.png)
 
 ## Installation
 
