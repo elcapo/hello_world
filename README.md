@@ -92,6 +92,8 @@ ps = model.predict(xs)
 plotter.plot(xs, ys, ps, "Results obtained after {} epochs".format(model.epochs))
 ```
 
+![Linear regression far away from the reference](images/linear-regression-far-away-from-the-reference.png)
+
 When you look at the following chart, pay attention to the **10e9** labels as they indicate that we are now asking the model to give us values that range from -1 to +1 (English) billions. That's not bad.
 
 ## Installation
