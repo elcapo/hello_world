@@ -93,3 +93,33 @@ plotter.plot(xs, ys, ps, "Results obtained after {} epochs".format(model.epochs)
 ```
 
 When you look at the following chart, pay attention to the **10e9** labels as they indicate that we are now asking the model to give us values that range from -1 to +1 (English) billions. That's not bad.
+
+## Installation
+
+This project was written with [Poetry](https://python-poetry.org). The following instructions should be sufficient for you to start using it.
+
+```bash
+git clone https://github.com/elcapo/hello_world.git
+cd hello_world
+poetry install
+```
+
+> Note that you'll need to install **git**, **python** and **poetry** to get this working.
+
+## Usage
+
+Once installed, use **Poetry**'s shell to interact with the package.
+
+```bash
+poetry shell
+```
+
+## Tests
+
+To run the tests, use **PyTest** from your shell.
+
+```bash
+pytest -v
+# or
+poetry run pytest
+```
